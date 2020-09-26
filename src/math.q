@@ -16,12 +16,12 @@
 
 .math.phase:{?[(0>x 0)and 0=x 1;acos -1;2*atan(x 1)%(x 0)+sqrt sum x*x]}
 
-.math.E:{(cos x;sin x)};
+.math.e:{(cos x;sin x)};
 
 .math.pi:acos -1;
 
-.math.w:{.math.E each neg 2*.math.pi*(a*/:a:til x)%x};
+.math.w:{.math.e each neg 2*.math.pi*(a*/:a:til x)%x};
 
-.math.dft:{(1%sqrt n)*(sum')each .math.mult[;x]each .math.w n:count flip x};
+.math.dft:{flip(1%sqrt n)*(sum')each .math.mult[;x]each .math.w n:count flip x};
 
-.math.idft:{(1%sqrt n)*(sum')each .math.mult[;x]each .math.conj each .math.w n:count flip x};
+.math.idft:{flip(1%sqrt n)*(sum')each .math.mult[;x]each .math.conj each .math.w n:count flip x};
