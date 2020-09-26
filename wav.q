@@ -13,7 +13,7 @@
   b:raze each flip each{(y#"h";y#2)1:x}[;n]each channels;
   d[`data`success]:(-1^b%32768;1b);
   d
-  }
+  };
 
 .wav.writeMono:{[d;fs;p]
   if[not 9h=type d;show"Only works for mono signals.";:(::)];
@@ -22,4 +22,4 @@
   sc1:raze(`byte$"fmt "),f each(16i;1h;1h;"i"$fs;"i"$fs*2;2h;16h);
   o:raze(`byte$"RIFF";f "i"$4+sum count each(sc1;sc2);`byte$"WAVE";sc1;sc2);
   p 1:o;
-  }
+  };

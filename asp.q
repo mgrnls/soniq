@@ -1,3 +1,3 @@
 \l wav.q
 
-.asp.mono:{(sum x)%count x}
+.asp.mono:{(sum x)%count x};
