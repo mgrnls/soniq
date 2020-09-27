@@ -25,3 +25,5 @@
 .math.dft:{flip(1%sqrt n)*(sum')each .math.mult[;x]each .math.w n:count flip x};
 
 .math.idft:{flip(1%sqrt n)*(sum')each .math.mult[;x]each .math.conj each .math.w n:count flip x};
+
+.math.zeropad:{c:ceiling 2 xlog n:count x;x,#[;0](prd c#2)-n};
