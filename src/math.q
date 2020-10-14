@@ -39,7 +39,7 @@
 .math.pi: acos -1;
 
 .math.w: {
-  / Construct a square matrix size x of DFT coefficients
+  / Construct a square matrix size x of DFT coefficients.
   .math.e each neg 2 * .math.pi * (a */: a: til x) % x
   };
 
