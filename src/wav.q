@@ -1,10 +1,15 @@
-.wav.writeMono:{[d;fs;p]
-  if[not 9h=type d;show"Only works for mono signals.";:(::)];
-  f:{reverse 0x0 vs x};
-  sc2:raze(`byte$"data";f"i"$count data;data:raze f each"h"$32768*1&-1|d);
-  sc1:raze(`byte$"fmt "),f each(16i;1h;1h;"i"$fs;"i"$fs*2;2h;16h);
-  o:raze(`byte$"RIFF";f "i"$4+sum count each(sc1;sc2);`byte$"WAVE";sc1;sc2);
-  p 1:o;
+/ Continue to clean up writeMono, it's a mess.
+.wav.writeMono: {[data; fs; path]
+  if[9h <> type data;
+    show "Only works for mono signals.";
+    : (::)];
+  f: {reverse 0x0 vs x};
+  d: 32768 * 1 & -1 | data;
+  sc2: raze (`byte $ "data"; f "i" $ count data; data: raze f each "h" $ d);
+  l: (16i; 1h; 1h; "i" $ fs; "i" $ fs * 2; 2h; 16h);
+  sc1: raze (`byte $ "fmt ") , f each l;
+  o: raze (`byte $ "RIFF"; f "i" $ 4 + sum count each (sc1; sc2); `byte $ "WAVE"; sc1; sc2);
+  path 1: o;
   };
 
 .wav.getLength: {sum x * prd each (til count x) #' 256};
@@ -24,7 +29,7 @@
   data: bytes 44 + til d `size;
   samples: 0N 2 # data;
   channels: samples {(til x) +\: x * til (count y) div x}[d `nc; samples];
-  n: (count data) div d `ba;
+  n: count first channels;
   b: raze each flip each {(y # "h"; y # 2) 1: x}[; n] each raze each channels;
   `fs`data`success ! (d `fs; -1 ^ b % 32768; 1b)
   };
