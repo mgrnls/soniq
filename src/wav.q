@@ -21,7 +21,7 @@
   if[(count 8 _ bytes) <> .wav.getLength bytes 4 + til 4;
     : `success`errmsg ! (0b; "Bad chunk size.")];
   if[1 <> .wav.getLength bytes 20 + til 2;
-    :`success`errmsg ! (0b; "Not PCM.")];
+    : `success`errmsg ! (0b; "Not PCM.")];
   fmt: bytes 20 22 24 28 32 34 40 + til each 2 2 4 4 2 2 4;
   d: `pcm`nc`fs`br`ba`bps`size ! .wav.getLength each fmt;
   if[16 <> d `bps;
